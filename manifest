@@ -1,0 +1,8 @@
+title=HomeStream
+subtitle=The best home video streamer
+major_version=1
+minor_version=0
+build_version=0000
+mm_icon_focus_hd=pkg:/images/mm_icon_focus_hd.png
+splash_color=#121212
+splash_min_time=0
