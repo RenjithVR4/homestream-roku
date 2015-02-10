@@ -51,16 +51,23 @@ End Function
 '*************************************************************
 
 Function getFiles(folders as Object) as Object
-  folderPath = ""
+  url = "http://192.168.1.156:46005/api/files?path="
+  count = 0
 
   for each folder in folders
-    folderPath = folderPath + "/" + HttpEncode(folder)
+    if(count = 0)
+      url = url + HttpEncode(folder)
+    else
+      url = url + "/" + HttpEncode(folder)
+    endif
+    count = count + 1
   end for
 
   request = CreateObject("roUrlTransfer")
   port = CreateObject("roMessagePort")
   request.SetMessagePort(port)
-  request.SetUrl("http://192.168.1.156:46005/api/videos" + folderPath)
+  print url
+  request.SetUrl(url)
   if (request.AsyncGetToString())
     while (true)
       msg = wait(0, port)
@@ -155,17 +162,21 @@ End Function
 Function displayVideo(folders as Object, videoFile as String) as Void
   print "Displaying video: " + videoFile
 
-  folderPath = ""
+  url = "http://192.168.1.156:46005"
+  count = 0
 
   for each folder in folders
-    folderPath = folderPath + "/" + HttpEncode(folder)
+    if(count >= 1)
+      url = url + "/" + HttpEncode(folder)
+    endif
+    count = count + 1
   end for
 
   p = CreateObject("roMessagePort")
   video = CreateObject("roVideoScreen")
   video.setMessagePort(p)
 
-  theVideo = "http://192.168.1.156:46005/videos" + folderPath + "/" + HttpEncode(videoFile)
+  theVideo = url + "/" + HttpEncode(videoFile)
 
   print theVideo
 
