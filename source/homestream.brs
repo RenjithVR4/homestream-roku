@@ -51,7 +51,7 @@ End Function
 '*************************************************************
 
 Function getFiles(folders as Object) as Object
-  url = "http://192.168.1.156:46005/api/files?path="
+  url = "http://192.168.1.189:46005/api/files?path="
   count = 0
 
   for each folder in folders
